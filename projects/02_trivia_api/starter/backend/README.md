@@ -66,26 +66,261 @@ One note before you delve into your tasks: for each endpoint you are expected to
 8. Create a POST endpoint to get questions to play the quiz. This endpoint should take category and previous question parameters and return a random questions within the given category, if provided, and that is not one of the previous questions. 
 9. Create error handlers for all expected errors including 400, 404, 422 and 500. 
 
-REVIEW_COMMENT
+## API Documentation
+### Endpoints
+- [GET /categories](#get-categories)
+- [GET /questions](#get-questions)
+- [DELETE /questions/<question_id>](#delete-questions)
+- [POST /questions](#post-questions)
+- [GET /categories/<category_id>/questions](#get-categories-questions)
+- [POST /quizzes](#post-quizzes)
+- [Example of Errors](#example-errors)
+
+# <a name="get-categories"></a>
+#### GET '/categories'
+- Fetches a list of all `categories` with its `type` .
+- Request Arguments: **None**
+- Request Headers : **None**
+- Example of Response:
+```js
+{
+  "success": true,
+  "categories": [
+    "Science",
+    "Art",
+    "Geography",
+    "History",
+    "Entertainment",
+    "Sports"
+  ]
+}
 ```
-This README is missing documentation of your endpoints. Below is an example for your endpoint to get all categories. Please use it as a reference for creating your documentation and resubmit your code. 
 
-Endpoints
-GET '/categories'
-GET ...
-POST ...
-DELETE ...
+# <a name="get-questions"></a>
+#### GET '/questions'
+- Fetches a list of dictionaries of questions in which the keys are the ids with all available fields, a list of all categories and number of total questions.
+- Request Arguments: 
+    - **integer** `page` (optional, 10 questions per page, defaults to `1`)
+- Request Headers: **None**
+- Example of Response:
+```js
+{
+"success": true,
+"questions": [
+    {
+      "answer": "Apollo 13",
+      "category": 5,
+      "difficulty": 4,
+      "id": 2,
+      "question": "What movie earned Tom Hanks his third straight Oscar nomination, in 1996?"
+    },
+    {
+      "answer": "Tom Cruise",
+      "category": 5,
+      "difficulty": 4,
+      "id": 4,
+      "question": "What actor did author Anne Rice first denounce, then praise in the role of her beloved Lestat?"
+    },
 
-GET '/categories'
-- Fetches a dictionary of categories in which the keys are the ids and the value is the corresponding string of the category
-- Request Arguments: None
-- Returns: An object with a single key, categories, that contains a object of id: category_string key:value pairs. 
-{'1' : "Science",
-'2' : "Art",
-'3' : "Geography",
-'4' : "History",
-'5' : "Entertainment",
-'6' : "Sports"}
+ [...]
+
+  ],
+  "total_questions": 19,
+  "categories": [
+    "Science",
+    "Art",
+    "Geography",
+    "History",
+    "Entertainment",
+    "Sports"
+  ],
+"current_category": [
+    "Science",
+    "Art",
+    "Geography",
+    "History",
+    "Entertainment",
+    "Sports"
+  ]
+
+}
+
+```
+
+# <a name="delete-questions"></a>
+#### DELETE '/questions/<question_id>'
+- Deletes specific question based on given id
+- Request Arguments: 
+  - **integer** `question_id`
+- Request Headers : **None**
+- Example of Response:
+```js
+{
+  "success": true,
+  "deleted": 10
+}
+```
+# <a name="post-questions"></a>
+#### POST '/questions' (search question)
+- Searches database for questions with a search term
+- Request Arguments: **None**
+- Request Headers :
+    - **string** `searchTerm` (<span style="color:red">*</span>required)
+- Example of Response:`searchTerm : "movie"`
+```js
+{
+  "success": true,
+  "questions": [
+    {
+      "answer": "Apollo 13",
+      "category": 5,
+      "difficulty": 4,
+      "id": 2,
+      "question": "What movie earned Tom Hanks his third straight Oscar nomination, in 1996?"
+    }
+  
+  ],
+ 
+  "total_questions": 19,
+  "current_category": [
+    {
+      "id": 1,
+      "type": "Science"
+    },
+    {
+      "id": 2,
+      "type": "Art"
+    },
+
+   [...] // all current categories
+
+  ]
+}
+
+```
+
+#### POST '/questions' (add question)
+- Insert a new question into the database.
+- Request Arguments: **None**
+- Request Headers :
+    - **string** `question` (<span style="color:red">*</span>required)
+    - **string** `answer` (<span style="color:red">*</span>required)
+    - **string** `category` (<span style="color:red">*</span>required)
+    - **integer** `difficulty` (<span style="color:red">*</span>required)
+- Example of Response:
+```js
+{
+ "success": true,
+  "created": 24, 
+  "questions": [
+    {
+      "answer": "Apollo 13",
+      "category": 5,
+      "difficulty": 4,
+      "id": 2,
+      "question": "What movie earned Tom Hanks his third straight Oscar nomination, in 1996?"
+    },
+    {
+      "answer": "Tom Cruise",
+      "category": 5,
+      "difficulty": 4,
+      "id": 4,
+      "question": "What actor did author Anne Rice first denounce, then praise in the role of her beloved Lestat?"
+    },
+   
+   [...] 
+
+  ],
+  "total_questions": 20
+}
+
+```
+# <a name="get-categories-questions"></a>
+#### GET '/categories/<category_id>/question'
+- Fetches all `questions` (paginated) from one specific category.
+- Request Arguments:
+  - **integer** `category_id` (<span style="color:red">*</span>required)
+  - **integer** `page` (optinal, 10 questions per Page, defaults to `1`)
+- Request Headers: **None**
+- Example of Response:`category_id : 2`
+
+```js
+{
+  "success": true,
+  "questions": [
+    {
+      "answer": "Escher",
+      "category": 2,
+      "difficulty": 1,
+      "id": 16,
+      "question": "Which Dutch graphic artist\u2013initials M C was a creator of optical illusions?"
+    },
+    {
+      "answer": "Mona Lisa",
+      "category": 2,
+      "difficulty": 3,
+      "id": 17,
+      "question": "La Giaconda is better known as what?"
+    },
+    {
+      "answer": "One",
+      "category": 2,
+      "difficulty": 4,
+      "id": 18,
+      "question": "How many paintings did Van Gogh sell in his lifetime?"
+    },
+    {
+      "answer": "Jackson Pollock",
+      "category": 2,
+      "difficulty": 2,
+      "id": 19,
+      "question": "Which American artist was a pioneer of Abstract Expressionism, and a leading exponent of action painting?"
+    }
+  ],
+  "total_questions": 4,
+  "current_category": "2"
+}
+```
+# <a name="post-quizzes"></a>
+#### POST '/quizzes'
+- Plays quiz game by providing a list of already asked questions and a category to ask for a fitting, random question.
+- Request Arguments: **None**
+- Request Headers : 
+     1. **list** `previous_questions` with **integer** ids from already asked questions
+     1. **dict** `quiz_category` (optional) with keys:
+        1.  **string** type
+        2. **integer** id from category
+- Example of Response:
+
+```js
+{ 
+  "success": true,
+  "question": {
+    "answer": "The Liver",
+    "category": 1,
+    "difficulty": 4,
+    "id": 20,
+    "question": "What is the heaviest organ in the human body?"
+  }
+}
+
+```
+# <a name="example-errors"></a>
+#### Example of Errors
+- If you try fetch a page which does not have any questions, you will encounter an error which looks like this:
+
+```bash
+curl -X GET http://127.0.0.1:5000/questions?page=111111111
+```
+
+- Example of Response:
+
+```js
+{
+  "error": 404,
+  "message": "resource not found",
+  "success": false
+}
 
 ```
 
