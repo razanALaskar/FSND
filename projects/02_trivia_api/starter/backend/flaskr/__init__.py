@@ -261,6 +261,8 @@ def create_app(test_config=None):
 			  questions_raw = (Question.query.filter(Question.id.notin_(previous_questions)).all())
 
 	  questions_formatted = [question.format() for question in questions_raw]
+	  if (len(questions_formatted) == 0):
+		  abort(404)
 	  random_question = questions_formatted[random.randint(0, len(questions_formatted))]
 	  return jsonify({
 		  'success': True,
