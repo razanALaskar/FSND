@@ -272,7 +272,7 @@ def create_app(test_config=None):
 		questions_formatted = [question.format() for question in questions_raw]
 		if (len(questions_formatted) == 0):
 			abort(404)
-		random_question = questions_formatted[random.randint(0, len(questions_formatted))]
+		random_question = questions_formatted[random.randint(0, len(questions_formatted)-1)]
 		return jsonify({
 			'success': True,
 			'question': random_question
