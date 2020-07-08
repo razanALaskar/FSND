@@ -87,7 +87,7 @@ Additionally, common pitfalls & error messages are explained, if applicable.
 
 ### Base URL
 
-**_ _**
+**_https://git.heroku.com/capstone-project-0.git_**
 
 ### Authentification
 
@@ -124,9 +124,6 @@ Click on a link to directly get to the ressource.
 
 Query paginated actors.
 
-```bash
-$ curl -X GET https://artist-capstone-fsnd-matthew.herokuapp.com/actors?page1
-```
 - Fetches a list of dictionaries of examples in which the keys are the ids with all available fields
 - Request Arguments: 
     - **integer** `page` (optional, 10 actors per page, defaults to `1` if not given)
@@ -155,13 +152,7 @@ $ curl -X GET https://artist-capstone-fsnd-matthew.herokuapp.com/actors?page1
 }
 ```
 #### Errors
-If you try fetch a page which does not have any actors, you will encounter an error which looks like this:
-
-```bash
-$ curl -X GET https://artist-capstone-fsnd-matthew.herokuapp.com/actors?page123124
-```
-
-will return
+If you try fetch a page which does not have any actors, it will return:
 
 ```js
 {
@@ -175,10 +166,6 @@ will return
 ### 2. POST /actors
 
 Insert new actor into database.
-
-```bash
-$ curl -X POST https://artist-capstone-fsnd-matthew.herokuapp.com/actors
-```
 
 - Request Arguments: **None**
 - Request Headers: (_application/json_)
@@ -199,14 +186,7 @@ $ curl -X POST https://artist-capstone-fsnd-matthew.herokuapp.com/actors
 
 ```
 #### Errors
-If you try to create a new actor without a requiered field like `name`,
-it will throw a `422` error:
-
-```bash
-$ curl -X GET https://artist-capstone-fsnd-matthew.herokuapp.com/actors?page123124
-```
-
-will return
+If you try to create a new actor without a requiered field like `name`,it will return:
 
 ```js
 {
@@ -220,10 +200,6 @@ will return
 ### 3. PATCH /actors
 
 Edit an existing Actor
-
-```bash
-$ curl -X PATCH https://artist-capstone-fsnd-matthew.herokuapp.com/actors/1
-```
 
 - Request Arguments: **integer** `id from actor you want to update`
 - Request Headers: (_application/json_)
@@ -256,13 +232,7 @@ $ curl -X PATCH https://artist-capstone-fsnd-matthew.herokuapp.com/actors/1
 }
 ```
 #### Errors
-If you try to update an actor with an invalid id it will throw an `404`error:
-
-```bash
-$ curl -X PATCH https://artist-capstone-fsnd-matthew.herokuapp.com/actors/125
-```
-
-will return
+If you try to update an actor with an invalid id will return:
 
 ```js
 {
@@ -286,10 +256,6 @@ Additionally, trying to update an Actor with already existing field values will 
 
 Delete an existing Actor
 
-```bash
-$ curl -X DELETE https://artist-capstone-fsnd-matthew.herokuapp.com/actors/1
-```
-
 - Request Arguments: **integer** `id from actor you want to delete`
 - Request Headers: `None`
 - Requires permission: `delete:actors`
@@ -306,13 +272,7 @@ $ curl -X DELETE https://artist-capstone-fsnd-matthew.herokuapp.com/actors/1
 
 ```
 #### Errors
-If you try to delete actor with an invalid id, it will throw an `404`error:
-
-```bash
-$ curl -X DELETE https://artist-capstone-fsnd-matthew.herokuapp.com/actors/125
-```
-
-will return
+If you try to delete actor with an invalid id, it will return:
 
 ```js
 {
@@ -327,9 +287,6 @@ will return
 
 Query paginated movies.
 
-```bash
-$ curl -X GET https://artist-capstone-fsnd-matthew.herokuapp.com/movies?page1
-```
 - Fetches a list of dictionaries of examples in which the keys are the ids with all available fields
 - Request Arguments: 
     - **integer** `page` (optional, 10 movies per page, defaults to `1` if not given)
@@ -357,13 +314,7 @@ $ curl -X GET https://artist-capstone-fsnd-matthew.herokuapp.com/movies?page1
 
 ```
 #### Errors
-If you try fetch a page which does not have any movies, you will encounter an error which looks like this:
-
-```bash
-$ curl -X GET https://artist-capstone-fsnd-matthew.herokuapp.com/movies?page123124
-```
-
-will return
+If you try fetch a page which does not have any movies, it will return:
 
 ```js
 {
@@ -377,10 +328,6 @@ will return
 ### 6. POST /movies
 
 Insert new Movie into database.
-
-```bash
-$ curl -X POST https://artist-capstone-fsnd-matthew.herokuapp.com/movies
-```
 
 - Request Arguments: **None**
 - Request Headers: (_application/json_)
@@ -400,13 +347,7 @@ $ curl -X POST https://artist-capstone-fsnd-matthew.herokuapp.com/movies
 ```
 #### Errors
 If you try to create a new movie without a requiered field like `name`,
-it will throw a `422` error:
-
-```bash
-$ curl -X GET https://artist-capstone-fsnd-matthew.herokuapp.com/movies?page123124
-```
-
-will return
+it will return:
 
 ```js
 {
@@ -420,10 +361,6 @@ will return
 ### 7. PATCH /movies
 
 Edit an existing Movie
-
-```bash
-$ curl -X PATCH https://artist-capstone-fsnd-matthew.herokuapp.com/movies/1
-```
 
 - Request Arguments: **integer** `id from movie you want to update`
 - Request Headers: (_application/json_)
@@ -454,13 +391,7 @@ $ curl -X PATCH https://artist-capstone-fsnd-matthew.herokuapp.com/movies/1
 
 ```
 #### Errors
-If you try to update an movie with an invalid id it will throw an `404`error:
-
-```bash
-$ curl -X PATCH https://artist-capstone-fsnd-matthew.herokuapp.com/movies/125
-```
-
-will return
+If you try to update an movie with an invalid id it will return:
 
 ```js
 {
@@ -484,10 +415,6 @@ Additionally, trying to update an Movie with already existing field values will 
 
 Delete an existing movie
 
-```bash
-$ curl -X DELETE https://artist-capstone-fsnd-matthew.herokuapp.com/movies/1
-```
-
 - Request Arguments: **integer** `id from movie you want to delete`
 - Request Headers: `None`
 - Requires permission: `delete:movies`
@@ -504,13 +431,7 @@ $ curl -X DELETE https://artist-capstone-fsnd-matthew.herokuapp.com/movies/1
 
 ```
 #### Errors
-If you try to delete movie with an invalid id, it will throw an `404`error:
-
-```bash
-$ curl -X DELETE https://artist-capstone-fsnd-matthew.herokuapp.com/movies/125
-```
-
-will return
+If you try to delete movie with an invalid id will return:
 
 ```js
 {
